@@ -1,0 +1,122 @@
+export const title = "Install Tailwind CSS with Ember.js";
+export const description = "Setting up Tailwind CSS in an Ember.js project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Ember.js project if you don&#x27;t have one set up already. The most common approach is to use <a href="https://guides.emberjs.com/release/getting-started/quick-start/#toc_create-a-new-application">Ember CLI</a>.</p>
+
+```shell
+npx ember-cli new my-project --embroider --no-welcome
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Using npm, install <code>@tailwindcss/postcss</code> and its peer dependencies, as well as <code>postcss-loader</code>.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss postcss-loader
+```
+
+<h2 id="enable-postcss-support">Enable PostCSS support</h2>
+
+<p>In your <code>ember-cli-build.js</code> file, configure PostCSS to process your CSS files.</p>
+
+```js
+'use strict';
+
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function (defaults) {
+  const app = new EmberApp(defaults, {
+    // Add options here
+  });
+
+  const { Webpack } = require('@embroider/webpack');
+  return require('@embroider/compat').compatBuild(app, Webpack, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+    // [!code highlight:22]
+    packagerOptions: {
+      webpackConfig: {
+        module: {
+          rules: [
+            {
+              test: /\.css$/i,
+              use: ['postcss-loader'],
+            },
+          ],
+        },
+      },
+    },
+  });
+};
+```
+
+<h2 id="configure-postcss-plugins">Configure PostCSS Plugins</h2>
+
+<p>Create a <code>postcss.config.mjs</code> file in the root of your project and add the <code>@tailwindcss/postcss</code> plugin to your PostCSS configuration.</p>
+
+```js
+export default {
+  plugins: {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {},
+  },
+}
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Create an <code>./app/app.css</code> file and add an <code>@import</code> for Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="import-the-css-file">Import the CSS file</h2>
+
+<p>Import the newly-created <code>./app/app.css</code> file in your <code>./app/app.js</code> file.</p>
+
+```js
+import Application from '@ember/application';
+import Resolver from 'ember-resolver';
+import loadInitializers from 'ember-load-initializers';
+import config from 'my-project/config/environment';
+// [!code highlight:2]
+import 'my-project/app.css';
+
+export default class App extends Application {
+  modulePrefix = config.modulePrefix;
+  podModulePrefix = config.podModulePrefix;
+  Resolver = Resolver;
+}
+
+loadInitializers(App, config.modulePrefix);
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run start</code>.</p>
+
+```shell
+npm run start
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind&#x27;s utility classes to style your content.</p>
+
+```hbs
+{{page-title "MyProject"}}
+
+<!-- [!code highlight:4] -->
+<h1 class="text-3xl font-bold underline">
+  Hello world!
+</h1>
+
+{{outlet}}
+```

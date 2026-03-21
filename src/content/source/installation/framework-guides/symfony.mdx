@@ -1,0 +1,96 @@
+export const title = "Install Tailwind CSS with Symfony";
+export const description = "Setting up Tailwind CSS in a Symfony project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Symfony project if you don’t have one set up already. The most common approach is to use <a href="https://symfony.com/download">the Symfony Installer</a>.</p>
+
+```shell
+symfony new --webapp my-project
+cd my-project
+```
+
+<h2 id="install-webpack-encore">Install Webpack Encore</h2>
+
+<p>Install Webpack Encore, which handles building your assets. See <a href="https://symfony.com/doc/current/frontend.html">the documentation</a> for more information.</p>
+
+```shell
+composer remove symfony/ux-turbo symfony/asset-mapper symfony/stimulus-bundle
+composer require symfony/webpack-encore-bundle symfony/ux-turbo symfony/stimulus-bundle
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Using npm, install <code>@tailwindcss/postcss</code> and its peer dependencies, as well as <code>postcss-loader</code>.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss postcss-loader
+```
+
+<h2 id="enable-postcss-support">Enable PostCSS support</h2>
+
+<p>In your <code>webpack.config.js</code> file, enable the PostCSS Loader. See <a href="https://symfony.com/doc/current/frontend/encore/postcss.html">the documentation</a> for more information.</p>
+
+```js
+Encore
+  .enablePostCssLoader()
+;
+```
+
+<h2 id="configure-postcss-plugins">Configure PostCSS Plugins</h2>
+
+<p>Create a <code>postcss.config.mjs</code> file in the root of your project and add the <code>@tailwindcss/postcss</code> plugin to your PostCSS configuration.</p>
+
+```js
+export default {
+  plugins: {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./assets/styles/app.css</code> that imports Tailwind CSS and an <code>@source</code> that ignores the public dir to prevent recompile loops in watch mode.</p>
+
+```css
+@import "tailwindcss";
+@source not "../../public";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run watch</code>.</p>
+
+```shell
+npm run watch
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Make sure your compiled CSS is included in the <code>&lt;head&gt;</code> then start using Tailwind’s utility classes to style your content.</p>
+
+```twig
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <!-- [!code highlight:4] -->
+    {% block stylesheets %}
+      {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+  </head>
+  <body>
+    <!-- [!code highlight:4] -->
+    <h1 class="text-3xl font-bold underline">
+      <!-- prettier-ignore -->
+      Hello world!
+    </h1>
+  </body>
+</html>
+```

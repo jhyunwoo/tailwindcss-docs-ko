@@ -1,0 +1,42 @@
+export const title = "Install Tailwind CSS with Ruby on Rails";
+export const description = "Setting up Tailwind CSS in Ruby on Rails v8+ project.";
+
+<div class="prose prose-slate dark:prose-dark relative z-10 mb-16 max-w-3xl"><p>The quickest way to start using Tailwind CSS in your Rails project is to use <a href="https://github.com/rails/tailwindcss-rails">Tailwind CSS for Rails</a> by running <code>rails new my-project --css tailwind</code>. This will automatically configure your Tailwind setup based on the official Rails example. If you&#x27;d like to configure Tailwind manually, continue with the rest of this guide.</p></div>
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Rails project if you don&#x27;t have one set up already. The most common approach is to use the <a href="https://guides.rubyonrails.org/command_line.html">Rails Command Line</a>.</p>
+
+```shell
+rails new my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install the <code>tailwindcss-rails</code> gem then run the install command to set up Tailwind CSS in your project.</p>
+
+```shell
+bundle add tailwindcss-rails
+./bin/rails tailwindcss:install
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>./bin/dev</code>.</p>
+
+```shell
+./bin/dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind&#x27;s utility classes to style your content.</p>
+
+```html
+<!-- [!code highlight:4] -->
+<h1 class="text-3xl font-bold underline">
+  <!-- prettier-ignore -->
+  Hello world!
+</h1>
+```

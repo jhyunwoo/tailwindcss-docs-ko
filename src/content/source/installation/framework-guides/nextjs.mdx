@@ -1,0 +1,65 @@
+export const title = "Install Tailwind CSS with Next.js";
+export const description = "Setting up Tailwind CSS in a Next.js project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Next.js project if you don’t have one set up already. The most common approach is to use <a href="https://nextjs.org/docs/api-reference/create-next-app">Create Next App</a>.</p>
+
+```shell
+npx create-next-app@latest my-project --typescript --eslint --app
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/postcss</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss
+```
+
+<h2 id="configure-postcss-plugins">Configure PostCSS Plugins</h2>
+
+<p>Create a <code>postcss.config.mjs</code> file in the root of your project and add the <code>@tailwindcss/postcss</code> plugin to your PostCSS configuration.</p>
+
+```js
+const config = {
+  plugins: {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./app/globals.css</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```jsx
+export default function Home() {
+  return (
+    // [!code highlight:4]
+    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  )
+}
+```

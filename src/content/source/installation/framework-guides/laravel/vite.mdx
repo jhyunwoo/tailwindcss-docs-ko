@@ -1,0 +1,81 @@
+export const title = "Install Tailwind CSS with Laravel";
+export const description = "Setting up Tailwind CSS in a Laravel project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Laravel project if you don’t have one set up already. The most common approach is to use <a href="https://laravel.com/docs#creating-an-application">the Laravel installer</a>.</p>
+
+```shell
+laravel new my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/vite</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-vite-plugin">Configure Vite Plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Vite configuration.</p>
+
+```ts
+import { defineConfig } from 'vite'
+// [!code highlight:2]
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    // [!code highlight:2]
+    tailwindcss(),
+    // …
+  ],
+})
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./resources/css/app.css</code> that imports Tailwind CSS. Additionally, tell Tailwind CSS to scan some directories for utilities.</p>
+
+```css
+@import "tailwindcss";
+
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Make sure your compiled CSS is included in the <code>&lt;head&gt;</code> then start using Tailwind’s utility classes to style your content.</p>
+
+```blade
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- [!code highlight:2] -->
+    @vite('resources/css/app.css')
+  </head>
+  <body>
+    <!-- [!code highlight:4] -->
+    <h1 class="text-3xl font-bold underline">
+      <!-- prettier-ignore -->
+      Hello world!
+    </h1>
+  </body>
+</html>
+```

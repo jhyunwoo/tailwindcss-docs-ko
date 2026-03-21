@@ -1,0 +1,121 @@
+export const title = "Install Tailwind CSS with Phoenix";
+export const description = "Setting up Tailwind CSS in a Phoenix project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Phoenix project if you don&#x27;t have one set up already. You can follow their <a href="https://hexdocs.pm/phoenix/installation.html">installation guide</a> to get up and running.</p>
+
+```shell
+mix phx.new myproject
+cd myproject
+```
+
+<h2 id="install-the-tailwind-plugin">Install the Tailwind plugin</h2>
+
+<p>Add the Tailwind plugin to your dependencies and run <code>mix deps.get</code> to install it.</p>
+
+```elixir
+defp deps do
+  [
+    # …
+    # [!code highlight:2]
+    {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
+  ]
+end
+```
+
+<h2 id="configure-the-tailwind-plugin">Configure the Tailwind plugin</h2>
+
+<p>In your <code>config/config.exs</code> file you can set which version of Tailwind CSS you want to use and customize your asset paths.</p>
+
+```elixir
+config :tailwind,
+  # [!code highlight:2]
+  version: "4.1.10",
+  myproject: [
+    args: ~w(
+      # [!code highlight:3]
+      --input=assets/css/app.css
+      --output=priv/static/assets/app.css
+    ),
+    # [!code highlight:2]
+    cd: Path.expand("..", __DIR__)
+  ]
+```
+
+<h2 id="update-your-deployment-script">Update your deployment script</h2>
+
+<p>Configure your <code>assets.deploy</code> alias to build your CSS on deployment.</p>
+
+```elixir
+defp aliases do
+  [
+    # …
+    "assets.deploy": [
+      # [!code highlight:2]
+      "tailwind myproject --minify",
+      "esbuild myproject --minify",
+      "phx.digest"
+    ]
+  ]
+end
+```
+
+<h2 id="enable-watcher-in-development">Enable watcher in development</h2>
+
+<p>Add Tailwind to your list of watchers in your <code>./config/dev.exs</code> file.</p>
+
+```elixir
+watchers: [
+  # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+  esbuild: {Esbuild, :install_and_run, [:myproject, ~w(--sourcemap=inline --watch)]},
+  # [!code highlight:2]
+  tailwind: {Tailwind, :install_and_run, [:myproject, ~w(--watch)]}
+]
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Run the install command to download the standalone Tailwind CLI.</p>
+
+```shell
+mix tailwind.install
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./assets/css/app.css</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="remove-the-default-css-import">Remove the default CSS import</h2>
+
+<p>Remove the CSS import from <code>./assets/js/app.js</code>, as Tailwind is now handling this for you.</p>
+
+```js
+// [!code --:3]
+// Remove this line if you add your own CSS build pipeline (e.g postcss).
+import "../css/app.css"
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>mix phx.server</code>.</p>
+
+```shell
+mix phx.server
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!-- [!code highlight:4] -->
+<h1 class="text-3xl font-bold underline">
+  <!-- prettier-ignore -->
+  Hello world!
+</h1>
+```

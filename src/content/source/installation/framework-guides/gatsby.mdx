@@ -1,0 +1,87 @@
+export const title = "Install Tailwind CSS with Gatsby";
+export const description = "Setting up Tailwind CSS in a Gatsby project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Gatsby project if you don’t have one set up already. The most common approach is to use <a href="https://www.gatsbyjs.com/docs/reference/gatsby-cli/#how-to-use-gatsby-cli">Gatsby CLI</a>.</p>
+
+```shell
+gatsby new my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Using npm, install <code>@tailwindcss/postcss</code>, its peer dependencies, and <code>gatsby-plugin-postcss</code>.</p>
+
+```shell
+npm install @tailwindcss/postcss tailwindcss postcss gatsby-plugin-postcss
+```
+
+<h2 id="enable-the-gatsby-postcss-plugin">Enable the Gatsby PostCSS plugin</h2>
+
+<p>In your <code>gatsby-config.js</code> file, enable <code>gatsby-plugin-postcss</code>. See <a href="https://www.gatsbyjs.com/plugins/gatsby-plugin-postcss/">the plugin&#x27;s documentation</a> for more information.</p>
+
+```js
+module.exports = {
+  plugins: [
+    // [!code highlight:2]
+    'gatsby-plugin-postcss',
+    // ...
+  ],
+}
+```
+
+<h2 id="configure-postcss-plugins">Configure PostCSS Plugins</h2>
+
+<p>Create a <code>postcss.config.js</code> file in the root of your project and add the <code>@tailwindcss/postcss</code> plugin to your PostCSS configuration.</p>
+
+```js
+module.exports = {
+  plugins: {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Create a <code>./src/styles/global.css</code> file and add an <code>@import</code> for Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="import-the-css-file">Import the CSS file</h2>
+
+<p>Create a <code>gatsby-browser.js</code> file at the root of your project if it doesn’t already exist, and import your newly-created <code>./src/styles/global.css</code> file.</p>
+
+```js
+import './src/styles/global.css';
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>gatsby develop</code>.</p>
+
+```shell
+gatsby develop
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```js
+export default function IndexPage() {
+  return (
+    <Layout>
+      /* [!code highlight:4] */
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+    </Layout>
+  )
+}
+```

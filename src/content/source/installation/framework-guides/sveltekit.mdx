@@ -1,0 +1,89 @@
+export const title = "Install Tailwind CSS with SvelteKit";
+export const description = "Setting up Tailwind CSS in a SvelteKit project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new SvelteKit project if you don&#x27;t have one set up already. The most common approach is outlined in the <a href="https://svelte.dev/docs/kit/creating-a-project">SvelteKit</a> documentation.</p>
+
+```shell
+npx sv create my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/vite</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-vite-plugin">Configure Vite Plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Vite configuration.</p>
+
+```ts
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+// [!code highlight:2]
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    // [!code highlight:2]
+    tailwindcss(),
+    sveltekit(),
+  ],
+});
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Create a <code>./src/app.css</code> file and add an <code>@import</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="import-the-css-file">Import the CSS file</h2>
+
+<p>Create a <code>./src/routes/+layout.svelte</code> file and import the newly-created <code>app.css</code> file.</p>
+
+```svelte
+<script>
+  let { children } = $props();
+  // [!code highlight:2]
+  import "../app.css";
+</script>
+
+{@render children()}
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content, making sure to import your Tailwind CSS theme for any <code>&lt;style&gt;</code> blocks that need to be processed by Tailwind.</p>
+
+```svelte
+<!-- [!code highlight:4] -->
+<h1 class="text-3xl font-bold underline">
+  <!-- prettier-ignore -->
+  Hello world!
+</h1>
+
+<style lang="postcss">
+  /* [!code highlight:2] */
+  @reference "tailwindcss";
+
+  :global(html) {
+    background-color: theme(--color-gray-100);
+  }
+</style>
+```

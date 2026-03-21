@@ -1,0 +1,80 @@
+export const title = "Install Tailwind CSS with Qwik";
+export const description = "Setting up Tailwind CSS in an Qwik project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Qwik project if you don&#x27;t have one set up already. The most common approach is to use <a href="https://qwik.dev/docs/getting-started/#create-an-app-using-the-cli">Create Qwik</a>.</p>
+
+```shell
+npm create qwik@latest empty my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/vite</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-vite-plugin">Configure Vite Plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Vite configuration.</p>
+
+```ts
+import { defineConfig } from 'vite'
+import { qwikVite } from "@builder.io/qwik/optimizer";
+import { qwikCity } from "@builder.io/qwik-city/vite";
+// …
+
+// [!code highlight:2]
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig(({ command, mode }): UserConfig => {
+  return {
+    plugins: [
+      // [!code highlight:2]
+      tailwindcss(),
+      qwikCity(),
+      qwikVite(),
+      tsconfigPaths(),
+    ],
+
+    // …
+  }
+})
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./src/global.css</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```tsx
+import { component$ } from '@builder.io/qwik'
+
+export default component$(() => {
+  return (
+    // [!code highlight:4]
+    <h1 class="text-3xl font-bold underline">
+      Hello World!
+    </h1>
+  )
+})
+```

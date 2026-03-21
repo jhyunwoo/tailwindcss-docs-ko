@@ -1,0 +1,70 @@
+export const title = "Install Tailwind CSS with Astro";
+export const description = "Setting up Tailwind CSS in an Astro project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Astro project if you don&#x27;t have one set up already. The most common approach is to use <a href="https://docs.astro.build/en/install-and-setup/#install-from-the-cli-wizard">create astro</a>.</p>
+
+```shell
+npm create astro@latest my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/vite</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-vite-plugin">Configure Vite Plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Vite plugins in your Astro config file.</p>
+
+```js
+// @ts-check
+import { defineConfig } from "astro/config";
+// [!code highlight:2]
+import tailwindcss from "@tailwindcss/vite";
+
+// https://astro.build/config
+export default defineConfig({
+  // [!code highlight:4]
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Create a <code>./src/styles/global.css</code> file and add an <code>@import</code> for Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind&#x27;s utility classes to style your content while making sure to import the newly created CSS file.</p>
+
+```astro
+---
+// [!code highlight:2]
+import "../styles/global.css";
+---
+
+<!-- [!code highlight:4] -->
+<h1 class="text-3xl font-bold underline">
+  Hello world!
+</h1>
+```

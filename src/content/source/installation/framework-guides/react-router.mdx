@@ -1,0 +1,71 @@
+export const title = "Install Tailwind CSS with React Router";
+export const description = "Setting up Tailwind CSS in a React Router project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new React Router project if you don’t have one set up already. The most common approach is to use <a href="https://reactrouter.com/start/framework/installation">Create React Router</a>.</p>
+
+```shell
+npx create-react-router@latest my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/vite</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-vite-plugin">Configure Vite Plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Vite configuration.</p>
+
+```ts
+import { reactRouter } from "@react-router/dev/vite";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+// [!code highlight:2]
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [
+    // [!code highlight:2]
+    tailwindcss(),
+    reactRouter(),
+    tsconfigPaths(),
+  ],
+});
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./app/app.css</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```tsx
+export default function Home() {
+  return (
+    // [!code highlight:4]
+    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  )
+}
+```

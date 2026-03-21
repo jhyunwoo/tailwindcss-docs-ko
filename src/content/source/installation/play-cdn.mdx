@@ -1,0 +1,53 @@
+export const title = "Play CDN";
+export const description = "Use the Play CDN to try Tailwind right in the browser without any build step.";
+
+<p>Use the Play CDN to try Tailwind right in the browser without any build step. The Play CDN is designed for development purposes only, and is not intended for production.</p>
+
+<h2 id="add-the-play-cdn-script-to-your-html">Add the Play CDN script to your HTML</h2>
+
+<p>Add the Play CDN script tag to the <code>&lt;head&gt;</code> of your HTML file, and start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- [!code highlight:2] -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <!-- [!code highlight:4] -->
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  </body>
+</html>
+```
+
+<h2 id="try-adding-some-custom-css">Try adding some custom CSS</h2>
+
+<p>Use <code>type=&quot;text/tailwindcss&quot;</code> to add custom CSS that supports all of Tailwind&#x27;s CSS features.</p>
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- [!code highlight:6] -->
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- [!code word:text-clifford] -->
+    <h1 class="text-3xl font-bold underline text-clifford">
+      Hello world!
+    </h1>
+  </body>
+</html>
+```

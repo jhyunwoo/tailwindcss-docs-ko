@@ -1,0 +1,76 @@
+export const title = "Installing Tailwind CSS with Vite";
+export const description = "Installing Tailwind CSS as a Vite plugin is the most seamless way to integrate it with frameworks like Laravel, SvelteKit, React Router, Nuxt, and SolidJS.";
+
+<p>Installing Tailwind CSS as a Vite plugin is the most seamless way to integrate it with frameworks like Laravel, SvelteKit, React Router, Nuxt, and SolidJS.</p>
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Vite project if you don’t have one set up already. The most common approach is to use <a href="https://vite.dev/guide/#scaffolding-your-first-vite-project">Create Vite</a>.</p>
+
+```shell
+npm create vite@latest my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>tailwindcss</code> and <code>@tailwindcss/vite</code> via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-the-vite-plugin">Configure the Vite plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Vite configuration.</p>
+
+```js
+import { defineConfig } from 'vite'
+// [!code highlight:2]
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    // [!code highlight:2]
+    tailwindcss(),
+  ],
+})
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to your CSS file that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code> or whatever command is configured in your <code>package.json</code> file.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-html">Start using Tailwind in your HTML</h2>
+
+<p>Make sure your compiled CSS is included in the <code>&lt;head&gt;</code> <em>(your framework might handle this for you)</em>, then start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- [!code highlight:2] -->
+  <link href="/src/style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- [!code highlight:4] -->
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+</body>
+</html>
+```

@@ -1,0 +1,50 @@
+export const title = "Tailwind CLI";
+export const description = "The simplest and fastest way to get up and running with Tailwind CSS from scratch is with the Tailwind CLI tool.";
+
+<p>The simplest and fastest way to get up and running with Tailwind CSS from scratch is with the Tailwind CLI tool. The CLI is also available as a <a href="https://github.com/tailwindlabs/tailwindcss/releases/latest">standalone executable</a> if you want to use it without installing Node.js.</p>
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>tailwindcss</code> and <code>@tailwindcss/cli</code> via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/cli
+```
+
+<h2 id="import-tailwind-in-your-css">Import Tailwind in your CSS</h2>
+
+<p>Add the <code>@import &quot;tailwindcss&quot;;</code> import to your main CSS file.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-the-tailwind-cli-build-process">Start the Tailwind CLI build process</h2>
+
+<p>Run the CLI tool to scan your source files for classes and build your CSS.</p>
+
+```shell
+npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
+```
+
+<h2 id="start-using-tailwind-in-your-html">Start using Tailwind in your HTML</h2>
+
+<p>Add your compiled CSS file to the <code>&lt;head&gt;</code> and start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- [!code highlight:2] -->
+  <link href="./output.css" rel="stylesheet">
+</head>
+<body>
+  <!-- [!code highlight:4] -->
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+</body>
+</html>
+```

@@ -1,0 +1,74 @@
+export const title = "Install Tailwind CSS with Parcel";
+export const description = "Setting up Tailwind CSS in a Parcel project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Parcel project if you don’t have one set up already. The most common approach is to add Parcel as a dev-dependency to your project as outlined in their <a href="https://parceljs.org/getting-started/webapp/">getting started guide</a>.</p>
+
+```shell
+mkdir my-project
+cd my-project
+npm init -y
+npm install parcel
+mkdir src
+touch src/index.html
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/postcss</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss
+```
+
+<h2 id="configure-postcss">Configure PostCSS</h2>
+
+<p>Create a <code>.postcssrc</code> file in your project root, and enable the <code>@tailwindcss/postcss</code> plugin.</p>
+
+```json
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Create a <code>./src/index.css</code> file and add an <code>@import</code> for Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npx parcel src/index.html</code>.</p>
+
+```shell
+npx parcel src/index.html
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Add your CSS file to the <code>&lt;head&gt;</code> and start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- [!code highlight:2] -->
+    <link href="./index.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- [!code highlight:4] -->
+    <h1 class="text-3xl font-bold underline">
+      <!-- prettier-ignore -->
+      Hello world!
+    </h1>
+  </body>
+</html>
+```

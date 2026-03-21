@@ -1,0 +1,60 @@
+export const title = "Install Tailwind CSS with Angular";
+export const description = "Setting up Tailwind CSS in an Angular project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Angular project if you don’t have one set up already. The most common approach is to use <a href="https://angular.dev/tools/cli/setup-local">Angular CLI</a>.</p>
+
+```shell
+ng new my-project --style css
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/postcss</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss --force
+```
+
+<h2 id="configure-postcss-plugins">Configure PostCSS Plugins</h2>
+
+<p>Create a <code>.postcssrc.json</code> file in the root of your project and add the <code>@tailwindcss/postcss</code> plugin to your PostCSS configuration.</p>
+
+```js
+{
+  "plugins": {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {}
+  }
+}
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./src/styles.css</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>ng serve</code>.</p>
+
+```shell
+ng serve
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!-- [!code highlight:4] -->
+<h1 class="text-3xl font-bold underline">
+  <!-- prettier-ignore -->
+  Hello world!
+</h1>
+```

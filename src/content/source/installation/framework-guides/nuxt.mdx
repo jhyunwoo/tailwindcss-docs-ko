@@ -1,0 +1,89 @@
+export const title = "Install Tailwind CSS with Nuxt";
+export const description = "Setting up Tailwind CSS in a Nuxt project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Nuxt project if you don’t have one set up already. The most common approach is to use <a href="https://nuxt.com/docs/4.x/getting-started/installation#new-project">Create Nuxt</a>.</p>
+
+```shell
+npm create nuxt my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/vite</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+<h2 id="configure-vite-plugin">Configure Vite Plugin</h2>
+
+<p>Add the <code>@tailwindcss/vite</code> plugin to your Nuxt configuration as a Vite plugin.</p>
+
+```ts
+// [!code highlight:2]
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineNuxtConfig({
+  compatibilityDate: "2025-07-15",
+  devtools: { enabled: true },
+  vite: {
+    plugins: [
+      // [!code highlight:2]
+      tailwindcss(),
+    ],
+  },
+});
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Create an <code>./app/assets/css/main.css</code> file and add an <code>@import</code> that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="add-the-css-file-globally">Add the CSS file globally</h2>
+
+<p>Add your newly-created <code>./app/assets/css/main.css</code> to the <code>css</code> array in your <code>nuxt.config.ts</code> file.</p>
+
+```ts
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineNuxtConfig({
+  compatibilityDate: "2025-07-15",
+  devtools: { enabled: true },
+  // [!code highlight:2]
+  css: ['./app/assets/css/main.css'],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+});
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code>.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```vue
+<template>
+  <!-- [!code highlight:4] -->
+  <h1 class="text-3xl font-bold underline">
+    <!-- prettier-ignore -->
+    Hello world!
+  </h1>
+</template>
+```

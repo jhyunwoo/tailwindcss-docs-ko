@@ -1,0 +1,63 @@
+export const title = "Installing Tailwind CSS with PostCSS";
+export const description = "Installing Tailwind CSS as a PostCSS plugin is the most seamless way to integrate it with frameworks like Next.js and Angular.";
+
+<p>Installing Tailwind CSS as a PostCSS plugin is the most seamless way to integrate it with frameworks like Next.js and Angular.</p>
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>tailwindcss</code>, <code>@tailwindcss/postcss</code>, and <code>postcss</code> via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss
+```
+
+<h2 id="add-tailwind-to-your-postcss-configuration">Add Tailwind to your PostCSS configuration</h2>
+
+<p>Add <code>@tailwindcss/postcss</code> to your <code>postcss.config.mjs</code> file, or wherever PostCSS is configured in your project.</p>
+
+```js
+export default {
+  plugins: {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {},
+  }
+}
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to your CSS file that imports Tailwind CSS.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run dev</code> or whatever command is configured in your <code>package.json</code> file.</p>
+
+```shell
+npm run dev
+```
+
+<h2 id="start-using-tailwind-in-your-html">Start using Tailwind in your HTML</h2>
+
+<p>Make sure your compiled CSS is included in the <code>&lt;head&gt;</code> <em>(your framework might handle this for you)</em>, then start using Tailwind’s utility classes to style your content.</p>
+
+```html
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- [!code highlight:2] -->
+  <link href="/dist/styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- [!code highlight:4] -->
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+</body>
+</html>
+```

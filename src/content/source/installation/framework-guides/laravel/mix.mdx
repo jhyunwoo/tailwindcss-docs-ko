@@ -1,0 +1,67 @@
+export const title = "Install Tailwind CSS with Laravel";
+export const description = "Setting up Tailwind CSS in a Laravel project.";
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/postcss</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss
+```
+
+<h2 id="add-tailwind-to-your-laravel-mix-configuration">Add Tailwind to your Laravel Mix configuration</h2>
+
+<p>In your <code>webpack.mix.js</code> file, add <code>tailwindcss</code> as a PostCSS plugin.</p>
+
+```js
+mix
+  .js("resources/js/app.js", "public/js")
+  .postCss("resources/css/app.css", "public/css", [
+    // [!code highlight:2]
+    require("@tailwindcss/postcss"),
+  ]);
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> to <code>./resources/css/app.css</code> that imports Tailwind CSS. Additionally, tell Tailwind CSS to scan some directories for utilities.</p>
+
+```css
+@import "tailwindcss";
+
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run watch</code>.</p>
+
+```shell
+npm run watch
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Make sure your compiled CSS is included in the <code>&lt;head&gt;</code> then start using Tailwind’s utility classes to style your content.</p>
+
+```blade
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- [!code highlight:2] -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- [!code highlight:4] -->
+    <h1 class="text-3xl font-bold underline">
+      <!-- prettier-ignore -->
+      Hello world!
+    </h1>
+  </body>
+</html>
+```

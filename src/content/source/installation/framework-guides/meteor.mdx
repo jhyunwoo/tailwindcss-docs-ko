@@ -1,0 +1,61 @@
+export const title = "Install Tailwind CSS with Meteor";
+export const description = "Setting up Tailwind CSS in a Meteor project.";
+
+<h2 id="create-your-project">Create your project</h2>
+
+<p>Start by creating a new Meteor project if you don&#x27;t have one set up already. The most common approach is to use <a href="https://docs.meteor.com/about/install.html">the Meteor CLI</a>.</p>
+
+```shell
+npx meteor create my-project
+cd my-project
+```
+
+<h2 id="install-tailwind-css">Install Tailwind CSS</h2>
+
+<p>Install <code>@tailwindcss/postcss</code> and its peer dependencies via npm.</p>
+
+```shell
+npm install tailwindcss @tailwindcss/postcss postcss postcss-load-config
+```
+
+<h2 id="configure-postcss-plugins">Configure PostCSS Plugins</h2>
+
+<p>Create a <code>postcss.config.mjs</code> file in the root of your project and add the <code>@tailwindcss/postcss</code> plugin to your PostCSS configuration.</p>
+
+```js
+export default {
+  plugins: {
+    // [!code highlight:2]
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+<h2 id="import-tailwind-css">Import Tailwind CSS</h2>
+
+<p>Add an <code>@import</code> for Tailwind CSS to your <code>./client/main.css</code> file.</p>
+
+```css
+@import "tailwindcss";
+```
+
+<h2 id="start-your-build-process">Start your build process</h2>
+
+<p>Run your build process with <code>npm run start</code>.</p>
+
+```shell
+npm run start
+```
+
+<h2 id="start-using-tailwind-in-your-project">Start using Tailwind in your project</h2>
+
+<p>Start using Tailwind’s utility classes to style your content.</p>
+
+```jsx
+export const App = () => (
+  // [!code highlight:4]
+  <h1 className="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+)
+```
